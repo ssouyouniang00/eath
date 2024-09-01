@@ -30,7 +30,7 @@ class _ConnexionState extends State<Connexion> {
     });
   }
   String password="useradmin";
-  String email="admin";
+  String email="user@admin.com";
 
   void _login() {
     // Exemple de validation simple
