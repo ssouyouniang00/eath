@@ -16,15 +16,16 @@ class _SuccesState extends State<Succes> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(bottom: 100, top: 70, right: 20, left: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      //  height: double.infinity,
+        padding: EdgeInsets.only(right: 20, left: 20),
+        child: ListView(
           children: [
-            Image.asset("assets/icons/succes.png", height: 150,),
+            SizedBox(height: 70,),
+            Center(child: Image.asset("assets/icons/succes.png", height: 150,)),
             SizedBox(height: 30,),
-            Text("Mot de passe changé!", style: GoogleFonts.poppins(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w600),),
+            Center(child: Text("Mot de passe changé!", style: GoogleFonts.poppins(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w600),)),
             SizedBox(height: 20,),
-            Text("Votre mot de passe a été chaangé avec succès!",textAlign: TextAlign.center, style: GoogleFonts.poppins(fontSize: 18, color: Colors.grey.shade700, fontWeight: FontWeight.w400),),
+            Center(child: Text("Votre mot de passe a été chaangé avec succès!",textAlign: TextAlign.center, style: GoogleFonts.poppins(fontSize: 18, color: Colors.grey.shade700, fontWeight: FontWeight.w400),)),
             SizedBox(height: 100,),
             InkWell(
               onTap: (){

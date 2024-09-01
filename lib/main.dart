@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'splash_screen.dart';
 
 void main() {
-  runApp(Eath());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_){
+    runApp(Eath());
+  });
 }
 
 class Eath extends StatelessWidget {

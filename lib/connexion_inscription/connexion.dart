@@ -1,7 +1,7 @@
-import 'package:eath/mes_constantes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../mes_constantes.dart';
 import 'forget_password.dart';
 import 'inscription.dart';
 
@@ -13,40 +13,94 @@ class Connexion extends StatefulWidget {
 }
 
 class _ConnexionState extends State<Connexion> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _passwordVisible = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _passwordVisible = !_passwordVisible;
+    });
+  }
+  String password="useradmin";
+  String email="admin";
+
+  void _login() {
+    // Exemple de validation simple
+    if (_emailController.text.isEmpty || _emailController.text!=email) {
+      // Afficher un message d'erreur ou effectuer une autre action
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Veuillez entrer un email valide')),
+      );
+      return;
+    }
+
+    if (_passwordController.text.isEmpty || _passwordController.text!=password) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Mot de passe incorrect')),
+      );
+      return;
+    }
+
+    // Logique de connexion ici
+    print('Email: ${_emailController.text}');
+    print('Mot de passe: ${_passwordController.text}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(bottom: 100, top: 70, right: 20, left: 20),
-        child: Column(
+        padding: EdgeInsets.only(bottom: 50, top: 70, right: 20, left: 20),
+        child: ListView(
           children: [
-            Text(
-              "Connexion",
-              style: GoogleFonts.poppins(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600),
+            Center(
+              child: Text(
+                "Connexion",
+                style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600),
+              ),
             ),
             SizedBox(height: 50),
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 label: Text(
                   "Email",
-                  style: GoogleFonts.poppins(color: Colors.grey, fontSize: 17),
+                  style: GoogleFonts.poppins(color: Colors.grey, fontSize: 15,                      fontWeight: FontWeight.w500
+                  ),
                 ),
               ),
+              keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(height: 40),
             TextField(
+              controller: _passwordController,
+              obscureText: !_passwordVisible,
               decoration: InputDecoration(
-                suffixIcon: Icon(
-                  Icons.visibility_outlined,
-                  color: Colors.grey,
-                  size: 30,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    color: Colors.grey,
+                    size: 30,
+                  ),
+                  onPressed: _togglePasswordVisibility,
                 ),
                 label: Text(
                   "Mot de passe",
-                  style: GoogleFonts.poppins(color: Colors.grey, fontSize: 17),
+                  style: GoogleFonts.poppins(color: Colors.grey, fontSize: 15,                      fontWeight: FontWeight.w500
+                  ),
                 ),
               ),
             ),
@@ -69,7 +123,7 @@ class _ConnexionState extends State<Connexion> {
             ),
             SizedBox(height: 30),
             InkWell(
-              onTap: null,
+              onTap: _login,
               child: Container(
                 height: 50,
                 width: double.infinity,
@@ -87,15 +141,17 @@ class _ConnexionState extends State<Connexion> {
                 ),
               ),
             ),
-            SizedBox(height: 50),
-            Text(
-              "ou",
-              style: GoogleFonts.poppins(
-                  fontSize: 17,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600),
+            SizedBox(height: 30),
+            Center(
+              child: Text(
+                "ou",
+                style: GoogleFonts.poppins(
+                    fontSize: 17,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600),
+              ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             InkWell(
               onTap: null,
               child: Container(
@@ -125,7 +181,7 @@ class _ConnexionState extends State<Connexion> {
                 ),
               ),
             ),
-            Expanded(child: Container()),
+            SizedBox(height: 50,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -146,7 +202,7 @@ class _ConnexionState extends State<Connexion> {
                     "S'inscrire",
                     style: GoogleFonts.poppins(
                         color: secondaryColor,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                         fontSize: 13),
                   ),
                 ),
