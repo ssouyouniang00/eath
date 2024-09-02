@@ -1,6 +1,6 @@
+import 'package:eath/Preference/maladies.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../mes_constantes.dart';
 import 'forget_password.dart';
 import 'inscription.dart';
@@ -29,29 +29,32 @@ class _ConnexionState extends State<Connexion> {
       _passwordVisible = !_passwordVisible;
     });
   }
-  String password="useradmin";
-  String email="admin";
 
-  void _login() {
-    // Exemple de validation simple
-    if (_emailController.text.isEmpty || _emailController.text!=email) {
-      // Afficher un message d'erreur ou effectuer une autre action
+  String? email = "admin";
+  String? password = "admin";
+
+  Future<void> _login() async {
+    if (_emailController.text.isEmpty || _emailController.text != email) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Veuillez entrer un email valide')),
       );
       return;
     }
 
-    if (_passwordController.text.isEmpty || _passwordController.text!=password) {
+    if (_passwordController.text.isEmpty || _passwordController.text != password) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Mot de passe incorrect')),
       );
       return;
     }
 
-    // Logique de connexion ici
-    print('Email: ${_emailController.text}');
-    print('Mot de passe: ${_passwordController.text}');
+
+
+    // Redirige l'utilisateur vers la page d'accueil
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => Maladies()),
+    );
   }
 
   @override
@@ -76,8 +79,10 @@ class _ConnexionState extends State<Connexion> {
               decoration: InputDecoration(
                 label: Text(
                   "Email",
-                  style: GoogleFonts.poppins(color: Colors.grey, fontSize: 15,                      fontWeight: FontWeight.w500
-                  ),
+                  style: GoogleFonts.poppins(
+                      color: Colors.grey,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
               keyboardType: TextInputType.emailAddress,
@@ -99,8 +104,10 @@ class _ConnexionState extends State<Connexion> {
                 ),
                 label: Text(
                   "Mot de passe",
-                  style: GoogleFonts.poppins(color: Colors.grey, fontSize: 15,                      fontWeight: FontWeight.w500
-                  ),
+                  style: GoogleFonts.poppins(
+                      color: Colors.grey,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -109,8 +116,10 @@ class _ConnexionState extends State<Connexion> {
               alignment: Alignment.bottomRight,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ForgetPassword()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ForgetPassword()));
                 },
                 child: Text(
                   "Mot de passe oublié?",
@@ -171,7 +180,7 @@ class _ConnexionState extends State<Connexion> {
                           height: 30,
                         )),
                     Text(
-                      "Se connecter avec google",
+                      "Se connecter avec Google",
                       style: GoogleFonts.poppins(
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
@@ -181,7 +190,7 @@ class _ConnexionState extends State<Connexion> {
                 ),
               ),
             ),
-            SizedBox(height: 50,),
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -195,8 +204,10 @@ class _ConnexionState extends State<Connexion> {
                 SizedBox(width: 10),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Inscription()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Inscription()));
                   },
                   child: Text(
                     "S'inscrire",

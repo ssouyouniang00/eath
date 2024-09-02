@@ -41,7 +41,7 @@ class _InscriptionState extends State<Inscription> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Perform registration action
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Connexion()));
     }
   }
 
